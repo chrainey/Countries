@@ -1,0 +1,12 @@
+.site-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.site-wrapper main {
+  flex-grow: 1;
+}
+
+.btn.dark {
+  background-color: #c58d39;
+}/*# sourceMappingURL=base.css.map */
