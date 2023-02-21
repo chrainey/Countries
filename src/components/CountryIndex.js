@@ -14,9 +14,8 @@ const CountryIndex = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get('https://restcountries.com/v3.1/all')
+        const { data } = await axios.get('https://restcountries.com/v2/all')
         setCountries(data)
-        console.log(data)
       } catch (err) {
         console.log(err)
       }
@@ -25,17 +24,24 @@ const CountryIndex = () => {
   })
   return (
     <Container as="main">
+      <h1 className='text-center mt-4 mb-4'>Countries</h1>
       <Row>
-        <Col md="6" lg="4">
-          <Link to="#">
-            <Card>
-              <Card.Img variant='top' src='https://flagcdn.com/w320/my.png'></Card.Img>
-              <Card.Body className='bg-light'>
-                <Card.Title className='text-center'>Malaysia - Asia</Card.Title>
-              </Card.Body>
-            </Card>
-          </Link>
-        </Col>
+        { countries.map(country => {
+          const { alpha2Code, name, region, flag } = country
+          
+          return (
+            <Col key={alpha2Code} md="6" lg="4" className='mb-4'>
+              <Link to={`/country/${alpha2Code}`}>
+                <Card>
+                  <Card.Img variant='top' src={flag}></Card.Img>
+                  <Card.Body className='bg-light'>
+                    <Card.Title className='text-center'>{name} - {region}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Link>
+            </Col>
+          )
+        })}
       </Row>
     </Container>
   )
